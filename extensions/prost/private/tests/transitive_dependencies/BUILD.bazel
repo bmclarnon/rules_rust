@@ -12,6 +12,7 @@ proto_library(
     ],
     strip_import_prefix = "/private/tests/transitive_dependencies",
     deps = [
+        ":a2_proto",
         "//private/tests/transitive_dependencies/b:b_proto",
         "//private/tests/types:types_proto",
         "@com_google_protobuf//:duration_proto",
@@ -68,4 +69,26 @@ rust_prost_toolchain(
     tonic_plugin = "//private/3rdparty/crates:protoc-gen-tonic__protoc-gen-tonic",
     tonic_plugin_flag = "--plugin=protoc-gen-tonic=%s",
     tonic_runtime = "//private:tonic_runtime",
+)
+
+proto_library(
+    name = "a2_proto",
+    srcs = [
+        "a2.proto",
+    ],
+    strip_import_prefix = "/private/tests/transitive_dependencies",
+    deps = [
+        ":a3_proto",
+    ],
+)
+
+proto_library(
+    name = "a3_proto",
+    srcs = [
+        "a3.proto",
+    ],
+    strip_import_prefix = "/private/tests/transitive_dependencies",
+    deps = [
+        "@com_google_protobuf//:empty_proto",
+    ],
 )

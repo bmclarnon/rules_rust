@@ -31,6 +31,7 @@ fn test_a() {
         }),
         duration: Some(duration),
         types: Some(Types::default()),
+        ..Default::default()
     };
 
     let b_ref = a.b.as_ref().unwrap();
